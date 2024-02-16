@@ -1,0 +1,15 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+	sshCommand = ssh -i ~/.ssh/id_ed25519_symmelink
+[remote "origin"]
+	url = git@github.com:symmelink/kinkdiff.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[user]
+	email = github@symme.link
+	name = symme.link
+[branch "main"]
+	remote = origin
+	merge = refs/heads/main
