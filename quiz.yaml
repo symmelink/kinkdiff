@@ -1,0 +1,268 @@
+---
+intimacy:
+  title: Intimacy
+  items:
+    - name: Hugging
+    - name: Kissing (body)
+      description: Planting kisses on various bodyparts. Hickies are listed under the light pain category.
+    - name: Kissing (mouth)
+    - name: Romance / Affection
+    - name: Sleepover
+      description: Staying with your partner overnight.
+      verbs: [ "visiting", "hosting" ]
+    - name: Spooning
+      description: Holding the partner close, often back to chest, and embracing them from behind.
+    - name: Using Real Names
+      description: Referring to the partner using real names, instead of scene names, pet names, or nicknames.
+clothing:
+  title: Clothing
+  verbs: [ "you wearing", "partner wearing" ]
+  items:
+    - name: Clothed sex
+    - name: Cosplay
+    - name: Cross-dressing
+    - name: Formal clothing
+    - name: Heels
+    - name: Latex
+    - name: Leather
+    - name: Lingerie
+    - name: Stockings
+    - name: Uniform
+groupings:
+  title: Groupings
+  verbs: [ "participating" ]
+  items:
+    - name: You and 1 male
+    - name: You and 1 female
+    - name: You and 1 male, 1 female
+    - name: You and 2 males
+    - name: You and 2 females
+    - name: Orgy setting
+sex_acts:
+  title: Sex Acts
+  items:
+    - name: Blowjobs
+    - name: Cunnilingus
+    - name: Deep throating
+    - name: Edging
+      descriptions: |
+        The act of bringing the partner very close to orgasm, but giving the
+        genitalia time to cool down, and then repeating the process.
+    - name: Face-sitting
+    - name: Facials
+      description: The act of ejaculating directly on the face of the partner.
+    - name: Handjobs
+      description: Stimulating the genitalia of the partner using mainly just hands.
+    - name: Mutual / shared masturbation
+    - name: Self-injury / Self-humiliation
+    - name: Stripping / Disrobing
+    - name: Swallowing
+    - name: Teasing
+penetration:
+  title: Penetration
+  items:
+    - name: Barebacking
+      description: Specifically, condomless penetration
+    - name: Fingering
+    - name: Fisting
+    - name: Object insertion
+    - name: Penetration
+    - name: Strap-on penetration
+    - name: Tantric/Yoni stimulation
+positions:
+  title: Special Positions
+  items:
+    - name: Free-hanging / sex swings
+    - name: Up against walls
+    - name: 69'ing
+    - name: Rope/chain suspension
+    - name: Unseen actor
+    - name: Stealth penetration
+anal:
+  title: Anal
+  items:
+    - name: Anal teasing / threats
+    - name: Anal toys / plugging
+    - name: Anal sex, pegging
+    - name: Rimming
+    - name: Double penetration
+    - name: Anal fisting
+restriction:
+  title: Bondage / Restriction
+  verbs: [ "dominating", "submitting" ]
+  items:
+    - name: Gag
+      description: |
+        A rubber or plastic ornament placed in the mouth of the wearer, making
+        them unable to speak.
+    - name: Collar
+    - name: Leash
+      description: |
+        A leash is the rope between the wearer (often tied to a collar) and
+        the dominant.
+    - name: Rope bondage
+    - name: Mitts
+      description: |
+        Cloth, leather or metal tools where you place your hands inside, often
+        closed in a fist. Makes the wearer unable to grab or hold objects with
+        their fingers. This category also include cat paws.
+    - name: Cuffs
+      description: |
+        Wrapped around wrists and often ankles too, cuffs have little
+        restrictions themselves, but using hooks and rope, they often makes it
+        easier for the dominant to restrict the wearer spontaneously.
+    - name: Wall/cross mounting
+    - name: Stockades
+      description: |
+        Freestanding rigs that restricts the head, and often arms or legs too.
+    - name: Chastity gear
+    - name: Encasement
+      description: |
+        Full encasement often means full movement restriction. A cage, full
+        rope harness, or duck tape restricting the person to absolutely minimal
+        movement.
+    - name: Blindfolds
+    - name: Sensory deprivation
+      descriptions: |
+        Covering both ears and eyes completely, often using noise-reduction
+        tech to emphasise the feeling of isolation.
+toys:
+  title: Toys
+  items:
+    - name: Dildos
+    - name: Plugs
+    - name: Vibrators
+      description: Phallic shaped devices with internal vibration.
+    - name: Magic wands
+    - description: |
+        Much like vibrators, a magic wand delivers a strong vibration to a larger
+        area with stronger force.
+    - name: Sybians
+    - name: Sex/Fucking Machines
+domination:
+  title: Domination
+  verbs: [ "dominating", "submitting" ]
+  items:
+    - name: Dominance & Submission
+    - name: Domestic servitude
+    - name: Slavery
+    - name: MD/lg
+      description: |
+        Mommy (or Daddy) Dom / Little Girl (or Boy), as a DS dynamic. See also:
+        Ageplay
+    - name: Discipline
+    - name: Begging
+    - name: Forced orgasm
+    - name: Orgasm control
+    - name: Orgasm denial
+scenarios:
+  title: Scenarios
+  items:
+    - name: Adult Baby
+    - name: Diaper Wearing
+    - name: Glory hole
+      description: |
+        The ritual of isolating a person from others, using holes in the wall as
+        the only link between the two.
+    - name: Humiliation
+    - name: Exhibitionism
+    - name: Voyeurism
+    - name: Medical
+    - name: Pet play (soft)
+    - name: Pet play (hard)
+    - name: Human furniture
+    - name: Human auctioning / appraisal
+    - name: Slave training
+    - name: Interrogation
+    - name: Gangbang
+    - name: Kidnapping
+    - name: Sleep play
+    - name: Hypnotism
+    - name: Unaware
+    - name: Freeuse
+      description: |
+        the receiver / submissive is always sexually available to the giver /
+        dominant
+    - name: Fake public use
+    - name: Practical sex ed
+    - name: Incest
+      description: |
+        The simulated fantasy of having relations with siblings, daughter/son to
+        parent or similar structures.
+    - name: Ageplay
+      description: |
+        Acting much younger or older than your actual age to fulfill a fantasy
+        scenario.
+    - name: Non-Consent / rapeplay
+      description: |
+        Consensual non-consent, pretending to not consent with pre-established
+        boundaries & safe words.
+    - name: Necrophilia
+      description: The simulated concept of a deceased participant.
+    - name: Nazi/War symbolism
+    - name: Cheating
+    - name: Real public use
+surrealism:
+  title: Surrealism
+  verbs: ["you are/have", "partner is/has"]
+  items:
+    - name: Futanari
+    - name: Catgirl/Puppygirl/etc.
+    - name: Furry
+    - name: Transformation
+      description: |
+        Starting off as one person, but ending as another. Also includes body-
+        swapping and similar concepts.
+    - name: Tentacles
+    - name: Monster/Beast
+    - name: Alien
+fluids:
+  title: Fluids
+  verbs: [ "yours", "partner's" ]
+  items:
+    - name: Blood
+    - name: Piss
+    - name: Scat
+    - name: Cum
+    - name: Breast milk
+touch:
+  title: Touch and Stimulation
+  items:
+    - name: Cock/Pussy worship
+    - name: Ass worship
+    - name: Foot play
+    - name: Tickling
+    - name: Sensation play
+    - name: Electro stimulation
+    - name: Breath play
+pain:
+  title: Pain
+  items:
+    - name: Light pain
+    - name: Heavy pain
+    - name: Hickies
+    - name: Nipple clamps
+    - name: Clothes pins / ZipStrips
+    - name: Body slapping
+    - name: Facial slapping
+    - name: Spanking
+    - name: Caning
+    - name: Flogging
+    - name: Beatings
+    - name: Whips
+    - name: Paddles
+    - name: Cock/Pussy slapping
+    - name: Cock/Pussy torture
+    - name: Breast torture
+    - name: Hot Wax
+    - name: Scratching
+    - name: Biting
+    - name: Burning
+    - name: Cutting
+    - name: Sounding
+      description: |
+        The practice of inserting something into the urethra, predominately on
+        male genitalia.
+    - name: Bruising (short-lasting)
+    - name: Markings (long-lasting)
+      description: Scars / tattoos
