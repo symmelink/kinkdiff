@@ -3,36 +3,17 @@ package main
 import (
 	"bytes"
 	_ "embed"
+	"encoding/json"
 	"github.com/aws/aws-lambda-go/lambda"
-	"github.com/ghodss/yaml"
 	"io"
-	"log"
 	"net/http"
 	"net/url"
 )
 
-//go:embed quiz.yaml
-var quizYaml []byte
-
-var Quiz map[string]QuizCategory
-
-type QuizCategory struct {
-	Title string
-	Verbs []string
-	Items []QuizItem
-}
-
-type QuizItem struct {
-	Name        string
-	Description string
-	Version     int
-}
-
-func init() {
-	if err := yaml.Unmarshal(quizYaml, &Quiz); err != nil {
-		log.Fatal(err)
-	}
-}
+const (
+	ContentTypeHtml = "text/html; charset=utf-8"
+	ContentTypeText = "text/plain; charset=utf-8"
+)
 
 type Request struct {
 	RawPath               string            `json:"rawPath"`
@@ -42,40 +23,82 @@ type Request struct {
 	Body                  []byte            `json:"body"`
 	RequestContext        struct {
 		HTTP struct {
-			Method string `json:"method"`
+			Method   string `json:"method"`
+			SourceIp string `json:"sourceIp"`
 		} `json:"http"`
 	} `json:"requestContext"`
 }
 
 type Response struct {
-	StatusCode int               `json:"statusCode"`
-	Headers    map[string]string `json:"headers"`
-	Body       string            `json:"body"`
-	Cookies    []string          `json:"cookies"`
+	StatusCode int         `json:"statusCode"`
+	Headers    http.Header `json:"-"`
+	Body       string      `json:"body"`
+	Cookies    []string    `json:"cookies"`
 }
 
-func HandleRequest(request Request) (Response, error) {
-	req := http.Request{
+func (r *Response) MarshalJSON() ([]byte, error) {
+	headers := map[string]string{}
+	for header, values := range r.Headers {
+		if len(values) == 0 {
+			continue
+		}
+		headers[header] = values[len(values)-1]
+	}
+	return json.Marshal(map[string]any{
+		"statusCode": r.StatusCode,
+		"body":       r.Body,
+		"cookies":    r.Cookies,
+		"headers":    headers,
+	})
+}
+
+func (r *Response) Header() http.Header {
+	return r.Headers
+}
+
+func (r *Response) Write(bytes []byte) (int, error) {
+	r.Body += string(bytes)
+	return len(bytes), nil
+}
+
+func (r *Response) WriteHeader(statusCode int) {
+	r.StatusCode = statusCode
+}
+
+var _ http.ResponseWriter = (*Response)(nil)
+var _ json.Marshaler = (*Response)(nil)
+
+func HandleRequest(request *Request) (res *Response, err error) {
+	req := &http.Request{
 		Method: request.RequestContext.HTTP.Method,
 		URL: &url.URL{
+			Scheme:   "https",
 			Path:     request.RawPath,
+			RawPath:  request.RawPath,
 			RawQuery: request.RawQueryString,
 		},
+		Header:        map[string][]string{},
+		Body:          io.NopCloser(bytes.NewBuffer(request.Body)),
+		ContentLength: int64(len(request.Body)),
+		RemoteAddr:    request.RequestContext.HTTP.SourceIp,
 	}
 
-	if len(request.Body) > 0 {
-		req.Body = io.NopCloser(bytes.NewBuffer(request.Body))
-		req.ContentLength = int64(len(request.Body))
+	router := http.NewServeMux()
+	router.HandleFunc("/", renderQuiz)
+
+	res = new(Response)
+	res.Headers = http.Header{}
+	router.ServeHTTP(res, req)
+
+	if res.StatusCode == 0 {
+		res.StatusCode = 200
 	}
 
-	return Response{
-		StatusCode: 200,
-		Headers: map[string]string{
-			"content-type": "text/html; charset=utf-8",
-		},
-		Body:    "hello, world",
-		Cookies: nil,
-	}, nil
+	if _, ok := res.Headers["content-type"]; !ok {
+		req.Header.Set("content-type", http.DetectContentType([]byte(res.Body)))
+	}
+
+	return res, nil
 }
 
 func main() {

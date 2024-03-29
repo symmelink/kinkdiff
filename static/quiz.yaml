@@ -1,10 +1,9 @@
 ---
-intimacy:
-  title: Intimacy
+- title: Intimacy
   items:
     - name: Hugging
     - name: Kissing (body)
-      description: Planting kisses on various bodyparts. Hickies are listed under the light pain category.
+      description: Planting kisses on various body parts. Hickies are listed under the light pain category.
     - name: Kissing (mouth)
     - name: Romance / Affection
     - name: Sleepover
@@ -14,8 +13,7 @@ intimacy:
       description: Holding the partner close, often back to chest, and embracing them from behind.
     - name: Using Real Names
       description: Referring to the partner using real names, instead of scene names, pet names, or nicknames.
-clothing:
-  title: Clothing
+- title: Clothing
   verbs: [ "you wearing", "partner wearing" ]
   items:
     - name: Clothed sex
@@ -28,8 +26,7 @@ clothing:
     - name: Lingerie
     - name: Stockings
     - name: Uniform
-groupings:
-  title: Groupings
+- title: Groupings
   verbs: [ "participating" ]
   items:
     - name: You and 1 male
@@ -38,8 +35,7 @@ groupings:
     - name: You and 2 males
     - name: You and 2 females
     - name: Orgy setting
-sex_acts:
-  title: Sex Acts
+- title: Sex Acts
   items:
     - name: Blowjobs
     - name: Cunnilingus
@@ -58,8 +54,7 @@ sex_acts:
     - name: Stripping / Disrobing
     - name: Swallowing
     - name: Teasing
-penetration:
-  title: Penetration
+- title: Penetration
   items:
     - name: Barebacking
       description: Specifically, condomless penetration
@@ -69,8 +64,7 @@ penetration:
     - name: Penetration
     - name: Strap-on penetration
     - name: Tantric/Yoni stimulation
-positions:
-  title: Special Positions
+- title: Special Positions
   items:
     - name: Free-hanging / sex swings
     - name: Up against walls
@@ -78,8 +72,7 @@ positions:
     - name: Rope/chain suspension
     - name: Unseen actor
     - name: Stealth penetration
-anal:
-  title: Anal
+- title: Anal
   items:
     - name: Anal teasing / threats
     - name: Anal toys / plugging
@@ -87,8 +80,7 @@ anal:
     - name: Rimming
     - name: Double penetration
     - name: Anal fisting
-restriction:
-  title: Bondage / Restriction
+- title: Bondage / Restriction
   verbs: [ "dominating", "submitting" ]
   items:
     - name: Gag
@@ -126,8 +118,7 @@ restriction:
       descriptions: |
         Covering both ears and eyes completely, often using noise-reduction
         tech to emphasise the feeling of isolation.
-toys:
-  title: Toys
+- title: Toys
   items:
     - name: Dildos
     - name: Plugs
@@ -139,8 +130,7 @@ toys:
         area with stronger force.
     - name: Sybians
     - name: Sex/Fucking Machines
-domination:
-  title: Domination
+- title: Domination
   verbs: [ "dominating", "submitting" ]
   items:
     - name: Dominance & Submission
@@ -155,8 +145,7 @@ domination:
     - name: Forced orgasm
     - name: Orgasm control
     - name: Orgasm denial
-scenarios:
-  title: Scenarios
+- title: Scenarios
   items:
     - name: Adult Baby
     - name: Diaper Wearing
@@ -202,8 +191,7 @@ scenarios:
     - name: Nazi/War symbolism
     - name: Cheating
     - name: Real public use
-surrealism:
-  title: Surrealism
+- title: Surrealism
   verbs: ["you are/have", "partner is/has"]
   items:
     - name: Futanari
@@ -216,8 +204,7 @@ surrealism:
     - name: Tentacles
     - name: Monster/Beast
     - name: Alien
-fluids:
-  title: Fluids
+- title: Fluids
   verbs: [ "yours", "partner's" ]
   items:
     - name: Blood
@@ -225,8 +212,7 @@ fluids:
     - name: Scat
     - name: Cum
     - name: Breast milk
-touch:
-  title: Touch and Stimulation
+- title: Touch and Stimulation
   items:
     - name: Cock/Pussy worship
     - name: Ass worship
@@ -235,8 +221,7 @@ touch:
     - name: Sensation play
     - name: Electro stimulation
     - name: Breath play
-pain:
-  title: Pain
+- title: Pain
   items:
     - name: Light pain
     - name: Heavy pain
