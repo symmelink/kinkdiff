@@ -15,6 +15,8 @@ var funcs = map[string]any{
 		}
 		return ret
 	},
+	"CommitHash":     func() string { return CommitHash },
+	"BuildTimestamp": func() string { return BuildTimestamp },
 }
 var templates = template.Must(
 	template.New("").

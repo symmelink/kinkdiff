@@ -2,12 +2,21 @@ package main
 
 import (
 	"bytes"
+	"context"
 	_ "embed"
 	"encoding/json"
 	"github.com/aws/aws-lambda-go/lambda"
+	"github.com/aws/aws-xray-sdk-go/xray"
+	"github.com/aws/aws-xray-sdk-go/xraylog"
 	"io"
 	"net/http"
 	"net/url"
+	"os"
+)
+
+var (
+	CommitHash     string
+	BuildTimestamp string
 )
 
 const (
@@ -30,13 +39,18 @@ type Request struct {
 }
 
 type Response struct {
-	StatusCode int         `json:"statusCode"`
-	Headers    http.Header `json:"-"`
-	Body       string      `json:"body"`
-	Cookies    []string    `json:"cookies"`
+	StatusCode int
+	Headers    http.Header
+	Body       *bytes.Buffer
+	Cookies    []string
+	ctx        context.Context
 }
 
 func (r *Response) MarshalJSON() ([]byte, error) {
+	if r.Body == nil {
+		r.Body = &bytes.Buffer{}
+	}
+
 	headers := map[string]string{}
 	for header, values := range r.Headers {
 		if len(values) == 0 {
@@ -44,21 +58,26 @@ func (r *Response) MarshalJSON() ([]byte, error) {
 		}
 		headers[header] = values[len(values)-1]
 	}
-	return json.Marshal(map[string]any{
+	_, seg := xray.BeginSubsegment(r.ctx, "*Response.MarshalJSON")
+	jsonBytes, err := json.Marshal(map[string]any{
 		"statusCode": r.StatusCode,
-		"body":       r.Body,
+		"body":       r.Body.String(),
 		"cookies":    r.Cookies,
 		"headers":    headers,
 	})
+	seg.CloseAndStream(err)
+	return jsonBytes, err
 }
 
 func (r *Response) Header() http.Header {
 	return r.Headers
 }
 
-func (r *Response) Write(bytes []byte) (int, error) {
-	r.Body += string(bytes)
-	return len(bytes), nil
+func (r *Response) Write(data []byte) (int, error) {
+	if r.Body == nil {
+		r.Body = &bytes.Buffer{}
+	}
+	return r.Body.Write(data)
 }
 
 func (r *Response) WriteHeader(statusCode int) {
@@ -68,7 +87,18 @@ func (r *Response) WriteHeader(statusCode int) {
 var _ http.ResponseWriter = (*Response)(nil)
 var _ json.Marshaler = (*Response)(nil)
 
-func HandleRequest(request *Request) (res *Response, err error) {
+func withXray(name string, handlerFunc http.HandlerFunc) http.HandlerFunc {
+	return func(rw http.ResponseWriter, req *http.Request) {
+		ctx, seg := xray.BeginSubsegment(req.Context(), name)
+		handlerFunc(rw, req.WithContext(ctx))
+		seg.CloseAndStream(nil)
+	}
+}
+
+func HandleRequest(ctx context.Context, request *Request) (res *Response, err error) {
+	ctx, seg := xray.BeginSubsegment(ctx, "HandleRequest")
+	defer seg.CloseAndStream(nil)
+
 	req := &http.Request{
 		Method: request.RequestContext.HTTP.Method,
 		URL: &url.URL{
@@ -82,11 +112,13 @@ func HandleRequest(request *Request) (res *Response, err error) {
 		ContentLength: int64(len(request.Body)),
 		RemoteAddr:    request.RequestContext.HTTP.SourceIp,
 	}
+	req = req.WithContext(ctx)
 
 	router := http.NewServeMux()
-	router.HandleFunc("/", renderQuiz)
+	router.HandleFunc("/", withXray("renderQuiz", renderQuiz))
 
 	res = new(Response)
+	res.ctx = ctx
 	res.Headers = http.Header{}
 	router.ServeHTTP(res, req)
 
@@ -95,10 +127,20 @@ func HandleRequest(request *Request) (res *Response, err error) {
 	}
 
 	if _, ok := res.Headers["content-type"]; !ok {
-		req.Header.Set("content-type", http.DetectContentType([]byte(res.Body)))
+		req.Header.Set("content-type", http.DetectContentType(res.Body.Bytes()))
 	}
 
 	return res, nil
+}
+
+func init() {
+	err := xray.Configure(xray.Config{
+		ServiceVersion: CommitHash + "-" + BuildTimestamp,
+	})
+	if err != nil {
+		panic(err)
+	}
+	xray.SetLogger(xraylog.NewDefaultLogger(os.Stderr, xraylog.LogLevelError))
 }
 
 func main() {
