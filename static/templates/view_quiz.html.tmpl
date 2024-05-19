@@ -1,3 +1,35 @@
-{{range $i, $q := .Quiz}}
-    <h1 id="cat-{{$i}}">{{$q.Title}}</h1>
-{{end}}
+{{template "header.html.tmpl"}}
+<div class="container">
+    <div class="row">
+        {{range $i, $q := .Quiz}}
+            <div class="col-3">
+                <h5 id="cat-{{$i}}">{{$q.Title}}</h5>
+                <div class="container">
+                    <div class="row">
+                        {{range $vi, $verb := $q.Verbs }}
+                            <div class="col">
+                                <h6>{{$verb}}</h6>
+                            </div>
+                        {{end}}
+                        <div class="col">&nbsp;</div>
+                    </div>
+                    {{range $ii, $item := $q.Items}}
+                        <div class="row">
+                            {{range $iv, $verb := $q.Verbs}}
+                                <div class="col">
+                                    <input name="{{$item}}-{{$verb}}" type="radio">
+                                    <input name="{{$item}}-{{$verb}}" type="radio">
+                                    <input name="{{$item}}-{{$verb}}" type="radio">
+                                    <input name="{{$item}}-{{$verb}}" type="radio">
+                                    <input name="{{$item}}-{{$verb}}" type="radio">
+                                </div>
+                            {{end}}
+                            <div class="col">{{$item.Name}}</div>
+                        </div>
+                    {{end}}
+                </div>
+            </div>
+        {{end}}
+    </div>
+</div>
+{{template "footer.html.tmpl"}}
