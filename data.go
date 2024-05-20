@@ -1,10 +1,14 @@
 package main
 
 import (
+	"embed"
 	_ "embed"
 	"github.com/ghodss/yaml"
 	"log"
 )
+
+//go:embed static/css
+var cssFs embed.FS
 
 //go:embed static/quiz.yaml
 var quizYaml []byte

@@ -116,6 +116,7 @@ func HandleRequest(ctx context.Context, request *Request) (res *Response, err er
 
 	router := http.NewServeMux()
 	router.HandleFunc("/", withXray("renderQuiz", renderQuiz))
+	router.HandleFunc("/static/css/", withXray("render css", http.FileServerFS(cssFs).ServeHTTP))
 
 	res = new(Response)
 	res.ctx = ctx

@@ -2,3 +2,9 @@
 .release
 bootstrap
 kinkdiff.zip
+static/css
+bootstrap-*.zip
+bootstrap-*
+package-lock.json
+nvm
+node_modules
